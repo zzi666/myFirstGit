@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>js统计文本框剩余字数</title>
+  <style type="text/css">
+    #area{
+      width: 300px;
+      height: 300px;
+      resize:none;
+    }
+  </style>
+</head>
+<body>
+  <textarea autofocus id="area" onkeydown="sy()" maxlength="10" placeholder="只能输入十个字"></textarea>
+<!--
+   resize:none 多行文本框不可以拖动
+   onkeypress="sy()"键盘按住或点击时调用方法
+   maxlength="10"定义最大宽度
+   placeholder="只能输入十个字"  定义默认提示
+   autofocus  定义自动获得焦点
+   -->
+  <span>你还可以输入:<strong id="span" >10</strong>个字</span>
+  <input type="button" value="统计" onclick="fun();">
+  <div id="div"></div>
+  <script type="text/javascript">
+     function sy() {
+       var num=document.getElementById("area").value.length;
+       //console.log(num);
+       var sheng=10-num;
+       if(sheng==0){
+         //变颜色为红色
+         console.log(sheng);
+         document.getElementById("span").style.color="#ff0000";
+       }else{
+         //变颜色为黑色
+         document.getElementById("span").style.color="#000000";
+       }
+       document.getElementById("span").innerHTML=sheng;
+     }
+     function fun(){
+       var txt=document.getElementById("area").value;
+       //这么写的意思是申请abc三个值都为0
+       var a=b=c=0;
+       for(var i=0;i<txt.length;i++){
+         var ch=txt.charAt(i);
+         if(ch>="a"&&ch<="z"){
+           a++;
+         }else if(ch>="A"&&ch<="Z"){
+           b++;
+         }else if(ch>="0"&&ch<="9"){
+           c++;
+         }
+       }
+       //abc中分别统计了小写字母、大写字母、数字的个数
+       document.getElementById("div").innerHTML="大写字母有"+b+"个，小写字母有"+a+"个，数字有"+c+"个";
+     }
+  </script>
+</body>
+</html>
